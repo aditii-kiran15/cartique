@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Website Title -->
+    <title>Cartique | Your Style, Your Story</title>
+
+    <!-- Browser Theme -->
+    <meta name="application-name" content="Cartique">
+    <meta name="theme-color" content="#FFF0F5">
+    <meta name="description" content="Discover fashion, accessories and lifestyle essentials at Cartique. Find your style and own your story.">
+
+    <!-- Website Icon -->
+    <link rel="icon" type="image/png"
+        href="https://cdn-icons-png.flaticon.com/512/3514/3514491.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS File -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        ✨ Free shipping on orders above ₹999
+    </div>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <a href="#home" class="logo">cartique<span>.</span></a>
+
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#products">Shop</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <button class="cart-button" id="cartButton">
+            <span>Bag</span>
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <p class="eyebrow">THE NEW EVERYDAY</p>
+
+                <h1>
+                    Find your style.<br>
+                    <span>Own your story.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Thoughtfully picked essentials for the way you live,
+                    dress and express yourself.
+                </p>
+
+                <a href="#products" class="shop-button">
+                    Explore Collection <span>↗</span>
+                </a>
+
+                <div class="hero-note">
+                    <span>✦</span> Curated with love, made for you
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img
+                    src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1000&q=85"
+                    alt="Fashion collection"
+                >
+
+                <div class="image-label">
+                    <span>THE EDIT</span>
+                    <p>Everyday, elevated.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="categories">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">EXPLORE YOUR VIBE</p>
+                    <h2>Shop by category</h2>
+                </div>
+            </div>
+
+            <div class="category-list">
+                <button class="category-chip active" data-category="All">
+                    All Products
+                </button>
+
+                <button class="category-chip" data-category="Fashion">
+                    Fashion
+                </button>
+
+                <button class="category-chip" data-category="Accessories">
+                    Accessories
+                </button>
+
+                <button class="category-chip" data-category="Lifestyle">
+                    Lifestyle
+                </button>
+            </div>
+        </section>
+
+        <!-- Products -->
+        <section class="products-section" id="products">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">A LITTLE SOMETHING FOR YOU</p>
+                    <h2>Our favourites<span>.</span></h2>
+                </div>
+
+                <p class="product-total" id="productTotal">
+                    Discover your next favourite
+                </p>
+            </div>
+
+            <!-- Search and Sorting -->
+            <div class="product-tools">
+                <div class="search-box">
+                    <span>⌕</span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search your favourites..."
+                        aria-label="Search products"
+                    >
+                </div>
+
+                <select id="sortSelect" aria-label="Sort products">
+                    <option value="default">Sort by: Featured</option>
+                    <option value="low-high">Price: Low to High</option>
+                    <option value="high-low">Price: High to Low</option>
+                    <option value="name">Name: A to Z</option>
+                </select>
+            </div>
+
+            <!-- Product Cards from JavaScript -->
+            <div class="product-grid" id="productGrid"></div>
+
+            <p class="empty-message" id="emptyMessage" hidden>
+                No products found. Try another search.
+            </p>
+        </section>
+
+        <!-- About -->
+        <section class="about-section" id="about">
+            <p class="eyebrow">A NOTE FROM US</p>
+
+            <h2>
+                Good finds.<br>
+                <span>Great feelings.</span>
+            </h2>
+
+            <p>
+                Cartique is all about discovering little things that make
+                everyday life feel a little more special.
+            </p>
+        </section>
+    </main>
+
+    <!-- Product Details Popup -->
+    <div class="modal-overlay" id="productModal" hidden>
+        <div
+            class="product-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modalTitle"
+        >
+            <button
+                class="close-modal"
+                id="closeModal"
+                aria-label="Close product details"
+            >×</button>
+
+            <div class="modal-content" id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart -->
+    <div class="cart-overlay" id="cartOverlay" hidden>
+        <div
+            class="cart-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cartTitle"
+        >
+            <div class="cart-header">
+                <div>
+                    <p class="eyebrow">YOUR LITTLE COLLECTION</p>
+                    <h2 id="cartTitle">Shopping bag<span>.</span></h2>
+                </div>
+
+                <button
+                    class="close-cart"
+                    id="closeCart"
+                    aria-label="Close shopping bag"
+                >×</button>
+            </div>
+
+            <!-- Cart Items from JavaScript -->
+            <div class="cart-items" id="cartItems"></div>
+
+            <div class="cart-footer">
+                <div class="cart-subtotal">
+                    <span>Subtotal</span>
+                    <strong id="cartSubtotal">₹0</strong>
+                </div>
+
+                <p class="shipping-note">
+                    Shipping and taxes calculated at checkout.
+                </p>
+
+                <button class="checkout-button" id="checkoutButton">
+                    Continue to checkout ↗
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
